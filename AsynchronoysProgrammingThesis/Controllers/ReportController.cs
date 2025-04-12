@@ -34,11 +34,12 @@ namespace Blitz.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [RequestSizeLimit(100_000_000)]
         [HttpPost("load", Name = RouteNames.LoadDocumentsRoute)]
-        public async Task<IActionResult> LoadDocuments([FromForm] List<IFormFile> formFiles, CancellationToken cancellationToken)
+        public async Task<IActionResult> LoadDocuments([FromForm] List<IFormFile> formFiles,
+            CancellationToken cancellationToken)
         {
             var accessToken = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
 
-            if(string.IsNullOrEmpty(accessToken))
+            if (string.IsNullOrEmpty(accessToken))
                 return Unauthorized();
 
             await AuthorityHelper.VerifyAdministratorAuthority(accessToken, _configuration, _authService);

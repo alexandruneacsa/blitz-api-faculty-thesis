@@ -41,13 +41,15 @@ namespace Blitz.Application.Services
 
                     tasksList.Add(entryStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken));
                 }
+
                 await Task.WhenAll(tasksList);
             }
 
             return ms;
         }
 
-        public async Task<VideoPage> FetchVideosExternal(string query, string orientation = "", string size = "", string locale = "", int page = 1, int pageSize = 15)
+        public async Task<VideoPage> FetchVideosExternal(string query, string orientation = "", string size = "",
+            string locale = "", int page = 1, int pageSize = 15)
         {
             var pexelsClient = new PexelsClient(_configuration["PexelsClientToken"]);
             var result = await pexelsClient.SearchVideosAsync(query, orientation, size, locale, page, pageSize);
@@ -84,19 +86,22 @@ namespace Blitz.Application.Services
                     }
 
                     var addedPicture = _picture.AddDocumentAsync(Document, token);
-                    var location = string.Format("{0}{1}{2}{1}", _configuration["StoragePath"], Path.DirectorySeparatorChar, "Videos");
+                    var location = string.Format("{0}{1}{2}{1}", _configuration["StoragePath"],
+                        Path.DirectorySeparatorChar, "Videos");
 
                     if (!Directory.Exists(location))
                         Directory.CreateDirectory(location);
 
-                    await addedPicture.ContinueWith(async x => {
+                    await addedPicture.ContinueWith(async x =>
+                    {
                         if (x.IsFaulted)
                         {
                             success = false;
                             return;
                         }
 
-                        await File.WriteAllBytesAsync($"{location}{Document.Name}.{Document.Extension}", Document.Image, token);
+                        await File.WriteAllBytesAsync($"{location}{Document.Name}.{Document.Extension}", Document.Image,
+                            token);
                     });
 
                     if (addedPicture.IsCompletedSuccessfully)
@@ -112,15 +117,21 @@ namespace Blitz.Application.Services
                     }
                 });
 
-                return new BlitzWrapper<List<VideoView>> { StatusCode = 200, ObjectResponse = result, ErrorMessage = "Successfull" };
+                return new BlitzWrapper<List<VideoView>>
+                    { StatusCode = 200, ObjectResponse = result, ErrorMessage = "Successfull" };
             }
             catch (OperationCanceledException ex2)
             {
-                return new BlitzWrapper<List<VideoView>> { StatusCode = 404, ObjectResponse = null, ErrorMessage = "Could not add the file on database or disk.\nThe task was cancelled" };
+                return new BlitzWrapper<List<VideoView>>
+                {
+                    StatusCode = 404, ObjectResponse = null,
+                    ErrorMessage = "Could not add the file on database or disk.\nThe task was cancelled"
+                };
             }
             catch (Exception ex)
             {
-                return new BlitzWrapper<List<VideoView>> { StatusCode = 404, ObjectResponse = null, ErrorMessage = ex.Message };
+                return new BlitzWrapper<List<VideoView>>
+                    { StatusCode = 404, ObjectResponse = null, ErrorMessage = ex.Message };
             }
         }
     }

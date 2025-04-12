@@ -4,7 +4,6 @@ using Blitz.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
-using System.Threading;
 using System.Transactions;
 
 namespace Blitz.Infrastructure.Repositories
@@ -30,6 +29,7 @@ namespace Blitz.Infrastructure.Repositories
                 await context.Borrowers.AddAsync(borrower);
                 await context.SaveChangesAsync();
             }
+
             return borrower;
         }
 
@@ -44,6 +44,7 @@ namespace Blitz.Infrastructure.Repositories
                     context.Borrowers.Remove(borrowerToDelete);
                     await context.SaveChangesAsync();
                 }
+
                 return borrowerToDelete;
             }
 
@@ -51,8 +52,8 @@ namespace Blitz.Infrastructure.Repositories
         }
 
         public async Task<Borrower> GetBorrowerByIdAsync(int id) => await Context().Borrowers
-             .Where(u => u.Id == id)
-             .FirstOrDefaultAsync();
+            .Where(u => u.Id == id)
+            .FirstOrDefaultAsync();
 
         public async Task<Borrower> UpdateBorrowerAsync(Borrower borrower)
         {
@@ -61,12 +62,14 @@ namespace Blitz.Infrastructure.Repositories
                 context.Borrowers.Update(borrower);
                 await context.SaveChangesAsync();
             }
+
             return borrower;
         }
 
         public async Task<IReadOnlyCollection<Borrower>> GetBorrowersAsync() => await Context().Borrowers.ToListAsync();
 
-        public async Task<List<Borrower>> AddManyBorrowersAsync(List<Borrower> borrowers, CancellationToken cancellationToken)
+        public async Task<List<Borrower>> AddManyBorrowersAsync(List<Borrower> borrowers,
+            CancellationToken cancellationToken)
         {
             using var context = Context();
             var borrowersBatches = InsertBatchHelper.SplitIntoBatches(borrowers, 4);
@@ -88,8 +91,7 @@ namespace Blitz.Infrastructure.Repositories
 
                     batch = borrowers.Skip(offset).Take(pageSize).ToList();
                     transactionScope.Complete();
-                }
-                while (batch.Count > 0);
+                } while (batch.Count > 0);
             });
 
             return borrowers;
@@ -122,12 +124,12 @@ namespace Blitz.Infrastructure.Repositories
                         offset += pageSize;
 
                         tempBatch = batch.Skip(offset).Take(pageSize).ToList();
-                        
-                        if(!tempBatch.Any())
+
+                        if (!tempBatch.Any())
                         {
                             break;
                         }
-                        
+
                         transaction.Commit();
                     }
                     catch (Exception ex)
@@ -135,14 +137,17 @@ namespace Blitz.Infrastructure.Repositories
                         Console.WriteLine($"Error inserting batch: {ex.Message}");
                         transaction.Rollback();
                     }
-                }
-                while (tempBatch.Count > 0);
+                } while (tempBatch.Count > 0);
             });
 
             timer.Stop();
-        }//asta nu-i bun
+        } 
 
-        public async Task<List<Borrower>> AddHeavyThroughputOfBorrowers(List<Borrower> borrowers, CancellationToken cancellationToken)
+        /*
+         * Optimized
+         */
+        public async Task<List<Borrower>> AddHeavyThroughputOfBorrowers(List<Borrower> borrowers,
+            CancellationToken cancellationToken)
         {
             var offset = 0;
             var pageSize = 50;
@@ -155,7 +160,7 @@ namespace Blitz.Infrastructure.Repositories
             {
                 using var context = Context();
                 using var transaction = await context.Database.BeginTransactionAsync();
-                
+
                 try
                 {
                     await context.Borrowers.AddRangeAsync(batch, cancellationToken);
@@ -171,11 +176,10 @@ namespace Blitz.Infrastructure.Repositories
                     Console.WriteLine($"Error inserting batch: {ex.Message}");
                     transaction.Rollback();
                 }
-            }
-            while (batch.Count > 0);
+            } while (batch.Count > 0);
 
             timer.Stop();
             return borrowers;
-        }//asta e bun
+        } 
     }
 }

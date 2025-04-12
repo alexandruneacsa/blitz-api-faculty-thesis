@@ -25,7 +25,7 @@ namespace Blitz.API.Controllers
         }
 
         /// <summary>
-        /// Download videos for a specific category. E.g. nature
+        /// Download videos for a specific category (nature, cars, programming and more)
         /// </summary>
         /// <param name="imageView"></param>
         /// <returns></returns>
@@ -33,7 +33,8 @@ namespace Blitz.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("download-all", Name = RouteNames.DownloadVideosRoute)]
-        public async Task<IActionResult> DownloadAllVideos([FromQuery] string query, [FromQuery] string fileName, CancellationToken cancellationToken)
+        public async Task<IActionResult> DownloadAllVideos([FromQuery] string query, [FromQuery] string fileName,
+            CancellationToken cancellationToken)
         {
             var accessToken = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
 
@@ -49,7 +50,7 @@ namespace Blitz.API.Controllers
         }
 
         /// <summary>
-        /// Read all videos from an external API, from Pexels. E.g. nature
+        /// Read all videos from an external API, from Pexels external API (nature, cars, programming and more)
         /// </summary>
         /// <param name="filteredPayload"></param>
         /// <returns></returns>
@@ -58,7 +59,8 @@ namespace Blitz.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet(Name = RouteNames.ReadVideosExternalRoute)]
         public async Task<IActionResult> GetFilteredPagedVideos([FromQuery] FilteredPayload payload) =>
-            Ok(await _videoService.FetchVideosExternal(payload.Query, payload.Orientation, payload.Size, payload.Locale, payload.Page, payload.PageSize));
+            Ok(await _videoService.FetchVideosExternal(payload.Query, payload.Orientation, payload.Size, payload.Locale,
+                payload.Page, payload.PageSize));
 
 
         /// <summary>

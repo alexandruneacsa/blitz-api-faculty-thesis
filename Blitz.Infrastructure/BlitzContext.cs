@@ -23,7 +23,7 @@ namespace Blitz.Infrastructure
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(_config["ConnectionStrings:Blitz"])
-            .LogTo(mesaj => Debug.WriteLine(mesaj));
+                .LogTo(mesaj => Debug.WriteLine(mesaj));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,12 +35,13 @@ namespace Blitz.Infrastructure
                 entity.Property(e => e.Id).HasColumnType("int");
 
                 entity.Property(e => e.Extension).HasColumnType("nvarchar(250)");
-               
+
                 entity.Property(e => e.ContentType).HasColumnType("nvarchar(250)");
 
                 entity.Property(e => e.Name).HasColumnType("nvarchar(250)");
 
-                entity.Property<byte[]>("DocumentContent").HasColumnName("DocumentContent").HasColumnType("Varbinary(max)");
+                entity.Property<byte[]>("DocumentContent").HasColumnName("DocumentContent")
+                    .HasColumnType("Varbinary(max)");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -62,12 +63,12 @@ namespace Blitz.Infrastructure
                     .HasColumnName("Username").HasColumnType("nvarchar(255)");
 
                 entity.Property(e => e.PhoneNumber)
-                  .HasMaxLength(255)
-                  .HasColumnName("PhoneNumber").HasColumnType("nvarchar(255)");
+                    .HasMaxLength(255)
+                    .HasColumnName("PhoneNumber").HasColumnType("nvarchar(255)");
             });
 
             modelBuilder.Entity<User>()
-           .HasKey(o => o.Id);
+                .HasKey(o => o.Id);
         }
     }
 }

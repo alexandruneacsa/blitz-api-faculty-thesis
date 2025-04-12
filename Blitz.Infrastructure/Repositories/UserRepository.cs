@@ -45,12 +45,14 @@ namespace Blitz.Infrastructure.Repositories
                 if (info == null)
                 {
                 }
+
                 result = await _userManager.CreateAsync(userToBeRegistered, password);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.StackTrace);
             }
+
             if (result != IdentityResult.Success)
             {
                 foreach (var error in result.Errors)
@@ -60,18 +62,20 @@ namespace Blitz.Infrastructure.Repositories
                         throw new InvalidOperationException("Could not be inserted");
                     }
                 }
+
                 throw new InvalidOperationException("Exception: " + result.Errors);
             }
+
             return userToBeRegistered;
         }
 
         public async Task<User> GetUserById(string userId) => await _context.Users
-              .FirstOrDefaultAsync(u => u.Id == userId);
+            .FirstOrDefaultAsync(u => u.Id == userId);
 
         public async Task<User> GetUserByEmail(string email) => await _context.Users
-                 .FirstOrDefaultAsync(u => u.Email == email);
+            .FirstOrDefaultAsync(u => u.Email == email);
 
         public async Task<User> GetUserByUsername(string username) => await _context.Users
-                 .FirstOrDefaultAsync(u => u.UserName == username);
+            .FirstOrDefaultAsync(u => u.UserName == username);
     }
 }

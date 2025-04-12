@@ -13,6 +13,7 @@ namespace Blitz.API.Configuration
             _blitzContext = blitzContext;
             _logger = logger;
         }
+
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             using (var transaction = _blitzContext.Database.BeginTransaction())
@@ -29,6 +30,7 @@ namespace Blitz.API.Configuration
                 _logger.LogError(transaction.TransactionId + "Has been rollbacked");
             }
         }
+
         public bool IsSuccessStatusCode(HttpResponse httpResponse)
         {
             return (httpResponse.StatusCode >= 200) && (httpResponse.StatusCode <= 299);

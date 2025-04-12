@@ -71,6 +71,7 @@ namespace Blitz.Application.Services
             {
                 responseObject.ErrorMessage = ex.Message;
             }
+
             if (resultingUser != null)
             {
                 userDetails = new UserDetailsModel
@@ -79,9 +80,11 @@ namespace Blitz.Application.Services
                     Username = resultingUser.UserName,
                     Email = resultingUser.Email,
                     IsAdmin = resultingUser.IsAdmin,
-                    JwtToken = TokenHelper.GenerateJwtToken(resultingUser.Email, resultingUser.Id, resultingUser.IsAdmin, _config)
+                    JwtToken = TokenHelper.GenerateJwtToken(resultingUser.Email, resultingUser.Id,
+                        resultingUser.IsAdmin, _config)
                 };
             }
+
             responseObject.ObjectResponse = userDetails;
             responseObject.StatusCode = 200;
             responseObject.ErrorMessage = "Succesfully login";
@@ -97,7 +100,8 @@ namespace Blitz.Application.Services
 
             try
             {
-                resultingUser = await _authentication.Signup(userRegisterModel.Username, userRegisterModel.Password, userRegisterModel.Email);
+                resultingUser = await _authentication.Signup(userRegisterModel.Username, userRegisterModel.Password,
+                    userRegisterModel.Email);
 
                 if (resultingUser != null)
                 {
@@ -106,7 +110,8 @@ namespace Blitz.Application.Services
                         UserId = resultingUser.Id,
                         Email = resultingUser.Email,
                         Username = resultingUser.UserName,
-                        JwtToken = TokenHelper.GenerateJwtToken(resultingUser.Email, resultingUser.Id, resultingUser.IsAdmin, _config)
+                        JwtToken = TokenHelper.GenerateJwtToken(resultingUser.Email, resultingUser.Id,
+                            resultingUser.IsAdmin, _config)
                     };
                 }
             }

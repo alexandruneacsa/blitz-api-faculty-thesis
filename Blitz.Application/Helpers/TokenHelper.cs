@@ -14,11 +14,13 @@ namespace Blitz.Application.Helpers
             var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("email", email), new Claim("id", userId), new Claim("isAdmin", isAdmin.ToString()) }),
+                Subject = new ClaimsIdentity(new[]
+                    { new Claim("email", email), new Claim("id", userId), new Claim("isAdmin", isAdmin.ToString()) }),
                 Expires = DateTime.UtcNow.AddHours(24),
                 Issuer = _config["Jwt:Issuer"],
                 Audience = _config["Jwt:Audience"],
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);

@@ -13,7 +13,7 @@ namespace Blitz.API.Controllers
     [Route("api/images")]
     public class ImageController : Controller
     {
-        public readonly IServiceImage _imageService;
+        private readonly IServiceImage _imageService;
         private readonly IConfiguration _configuration;
         private readonly IAuthService _authService;
 
@@ -33,7 +33,8 @@ namespace Blitz.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("download-all", Name = RouteNames.DownloadPicturesRoute)]
-        public async Task<IActionResult> DownloadAllPictures([FromQuery] string query, CancellationToken cancellationToken)
+        public async Task<IActionResult> DownloadAllPictures([FromQuery] string query,
+            CancellationToken cancellationToken)
         {
             var accessToken = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
 
@@ -58,6 +59,7 @@ namespace Blitz.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet(Name = RouteNames.ReadImagesExternalRoute)]
         public async Task<IActionResult> GetNatureImages([FromQuery] FilteredPayload payload) =>
-             Ok(await _imageService.FetchImagesExternal(payload.Query, payload.Orientation, payload.Size, payload.Color, payload.Locale, payload.Page, payload.PageSize));
+            Ok(await _imageService.FetchImagesExternal(payload.Query, payload.Orientation, payload.Size, payload.Color,
+                payload.Locale, payload.Page, payload.PageSize));
     }
 }

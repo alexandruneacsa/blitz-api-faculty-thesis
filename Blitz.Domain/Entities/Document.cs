@@ -13,6 +13,6 @@ namespace Blitz.Domain.Entities
         public string Extension { get; set; }
         public string ContentType { get; set; }
         public string Name { get; set; }
-        public byte[] Image { get;set; }
+        public byte[] Image { get; set; }
     }
 }

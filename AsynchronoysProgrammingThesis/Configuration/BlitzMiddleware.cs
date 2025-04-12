@@ -29,7 +29,8 @@ namespace Blitz.API.Configuration
             await _nextDelegate(httpContext);
         }
 
-        private async Task AttachUserToContext(HttpContext httpContext, string jwtToken, IAuthService authenticationService)
+        private async Task AttachUserToContext(HttpContext httpContext, string jwtToken,
+            IAuthService authenticationService)
         {
             var jwtHandler = new JwtSecurityTokenHandler();
             var validationParameters = new TokenValidationParameters
@@ -53,5 +54,4 @@ namespace Blitz.API.Configuration
             httpContext.Items["User"] = user;
         }
     }
-
 }

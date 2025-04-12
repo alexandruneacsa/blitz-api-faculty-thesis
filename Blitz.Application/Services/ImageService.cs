@@ -7,9 +7,9 @@ using System.IO.Compression;
 
 namespace Blitz.Application.Services
 {
-    public class ImageService: IServiceImage
+    public class ImageService : IServiceImage
     {
-        public readonly IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public ImageService(IConfiguration configuration)
         {
@@ -34,13 +34,15 @@ namespace Blitz.Application.Services
 
                     tasksList.Add(entryStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken));
                 }
+
                 await Task.WhenAll(tasksList);
             }
 
             return ms;
         }
 
-        public async Task<PhotoPage> FetchImagesExternal(string query, string orientation = "", string size = "", string color = "", string locale = "", int page = 1, int pageSize = 15)
+        public async Task<PhotoPage> FetchImagesExternal(string query, string orientation = "", string size = "",
+            string color = "", string locale = "", int page = 1, int pageSize = 15)
         {
             var pexelsClient = new PexelsClient(_configuration["PexelsClientToken"]);
             var result = await pexelsClient.SearchPhotosAsync(query, orientation, size, color, locale, page, pageSize);

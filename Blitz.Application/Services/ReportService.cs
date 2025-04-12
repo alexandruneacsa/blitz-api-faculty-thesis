@@ -16,16 +16,17 @@ namespace Blitz.Application.Services
             _code = code;
             _borrower = borrower;
         }
-       
-        public async Task<BlitzWrapper<List<Borrower>>> LoadBorrowersAsync(List<IFormFile> formFiles, CancellationToken cancellationToken)
+
+        public async Task<BlitzWrapper<List<Borrower>>> LoadBorrowersAsync(List<IFormFile> formFiles,
+            CancellationToken cancellationToken)
         {
             var listOfBorrowers = new List<Borrower>();
-         
-            if(formFiles == null || !formFiles.Any())
+
+            if (formFiles == null || !formFiles.Any())
             {
                 return new BlitzWrapper<List<Borrower>>("The system needs at list one document loaded", null, 404);
             }
-            
+
             await Parallel.ForEachAsync(formFiles, async (file, ca) =>
             {
                 using var stream = new MemoryStream();
@@ -35,22 +36,23 @@ namespace Blitz.Application.Services
 
                 List<string> fileContents;
                 using StreamReader reader = new(stream);
-                
-                fileContents = (await reader.ReadToEndAsync()).Replace("\\,", ".").Replace("\r", "").Split("\n").ToList();
-                
+
+                fileContents = (await reader.ReadToEndAsync()).Replace("\\,", ".").Replace("\r", "").Split("\n")
+                    .ToList();
+
                 var length = fileContents[0].Split(",").Length;
-                
+
                 fileContents.RemoveAt(0);
-               
+
                 foreach (var line in fileContents)
                 {
                     var parts = line.Split(",");
-                    
-                    if(parts.Length != length)
+
+                    if (parts.Length != length)
                     {
                         continue;
                     }
-                    
+
                     var borrowerView = new Borrower
                     {
                         cod_fiscal = parts[0],
@@ -105,8 +107,11 @@ namespace Blitz.Application.Services
             await _borrower.AddMultipleBorrowersAsync(listOfBorrowers);
 
             return new BlitzWrapper<List<Borrower>>("Result", listOfBorrowers, 200);
-        }//asta nu-i eficient
+        } 
 
+        /*
+         * Optimized
+         */
         public async Task LoadCodesAsync(List<IFormFile> formFiles)
         {
             var listOfCodes = new List<Code>();
@@ -121,7 +126,8 @@ namespace Blitz.Application.Services
                 List<string> fileContents;
                 using StreamReader reader = new(stream);
 
-                fileContents = (await reader.ReadToEndAsync()).Replace("\\,", ".").Replace("\r", "").Split("\n").ToList();
+                fileContents = (await reader.ReadToEndAsync()).Replace("\\,", ".").Replace("\r", "").Split("\n")
+                    .ToList();
 
                 var length = fileContents[0].Split(",").Length;
 
@@ -184,6 +190,6 @@ namespace Blitz.Application.Services
             });
 
             await _code.AddCodesAsync2(listOfCodes);
-        }//asta e cel bun, eficient
+        } 
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Net.Http.Json;
 
 namespace Blitz.Application.Helpers
@@ -54,7 +53,7 @@ namespace Blitz.Application.Helpers
                 {
                     content = await client.GetByteArrayAsync(url);
                 }
-                
+
                 return content;
             }
             catch (Exception)

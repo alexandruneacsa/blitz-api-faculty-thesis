@@ -3,7 +3,7 @@ using Blitz.Application.Services;
 using Blitz.Infrastructure.Interfaces;
 using Blitz.Infrastructure.Repositories;
 
-namespace Blitz.API.Utils.Extensions
+namespace Blitz.API.Extensions
 {
     public static class DependencyExtension
     {

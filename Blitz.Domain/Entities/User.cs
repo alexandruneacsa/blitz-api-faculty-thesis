@@ -8,7 +8,6 @@ namespace Blitz.Domain.Entities
     {
         public User()
         {
-
         }
 
         public User(string email, string username)
@@ -23,6 +22,7 @@ namespace Blitz.Domain.Entities
             UserName = username;
             PhoneNumber = phoneNumber;
         }
+
         public bool IsAdmin { get; set; }
     }
 }

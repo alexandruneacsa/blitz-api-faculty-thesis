@@ -6,7 +6,9 @@ namespace Blitz.Application.Interfaces
 {
     public interface IReportService
     {
-        Task<BlitzWrapper<List<Borrower>>> LoadBorrowersAsync(List<IFormFile> formFiles, CancellationToken cancellationToken);
+        Task<BlitzWrapper<List<Borrower>>> LoadBorrowersAsync(List<IFormFile> formFiles,
+            CancellationToken cancellationToken);
+
         Task LoadCodesAsync(List<IFormFile> formFiles);
     }
 }

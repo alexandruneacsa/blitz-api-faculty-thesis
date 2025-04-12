@@ -28,6 +28,7 @@ namespace Blitz.Infrastructure.Repositories
                 await context.Codes.AddAsync(code);
                 await context.SaveChangesAsync();
             }
+
             return code;
         }
 
@@ -42,6 +43,7 @@ namespace Blitz.Infrastructure.Repositories
                     context.Codes.Remove(codeToDelete);
                     await context.SaveChangesAsync();
                 }
+
                 return codeToDelete;
             }
 
@@ -49,8 +51,8 @@ namespace Blitz.Infrastructure.Repositories
         }
 
         public async Task<Code> GetCodeByIdAsync(int id) => await Context().Codes
-             .Where(u => u.Id == id)
-             .FirstOrDefaultAsync();
+            .Where(u => u.Id == id)
+            .FirstOrDefaultAsync();
 
         public async Task<Code> UpdateCodeAsync(Code code)
         {
@@ -59,10 +61,11 @@ namespace Blitz.Infrastructure.Repositories
                 context.Codes.Update(code);
                 await context.SaveChangesAsync();
             }
+
             return code;
         }
 
-        public async Task<IReadOnlyCollection<Code>> GetCodesAsync() =>  await Context().Codes.ToListAsync();
+        public async Task<IReadOnlyCollection<Code>> GetCodesAsync() => await Context().Codes.ToListAsync();
 
         public async Task<List<Code>> AddCodesAsync(List<Code> codes, CancellationToken cancellationToken)
         {
@@ -86,8 +89,7 @@ namespace Blitz.Infrastructure.Repositories
 
                     batch = codes.Skip(offset).Take(pageSize).ToList();
                     transactionScope.Complete();
-                }
-                while (batch.Count > 0);
+                } while (batch.Count > 0);
             });
 
             return codes;
@@ -96,7 +98,7 @@ namespace Blitz.Infrastructure.Repositories
         public async Task AddCodesAsync2(List<Code> codes)
         {
             var batches = InsertBatchHelper.SplitIntoBatches(codes, 50);
-            
+
             await Parallel.ForEachAsync(batches, async (batch, ca) =>
             {
                 using var context = Context();
@@ -107,6 +109,7 @@ namespace Blitz.Infrastructure.Repositories
                     {
                         await context.Codes.AddAsync(entity, ca);
                     }
+
                     await context.SaveChangesAsync(ca);
                     transaction.Commit();
                 }

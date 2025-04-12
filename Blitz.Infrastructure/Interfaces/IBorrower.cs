@@ -13,6 +13,7 @@ namespace Blitz.Infrastructure.Interfaces
         Task<Borrower> DeleteBorrowerAsync(int id);
         Task<Borrower> AddBorrowerAsync(Borrower borrower);
 
-        Task<List<Borrower>> AddHeavyThroughputOfBorrowers(List<Borrower> borrowers, CancellationToken cancellationToken);
+        Task<List<Borrower>> AddHeavyThroughputOfBorrowers(List<Borrower> borrowers,
+            CancellationToken cancellationToken);
     }
 }

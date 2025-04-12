@@ -38,6 +38,7 @@ namespace Blitz.Infrastructure.Repositories
                 await context.SaveChangesAsync(cancellationToken);
                 return pictureToDelete;
             }
+
             return null;
         }
 
