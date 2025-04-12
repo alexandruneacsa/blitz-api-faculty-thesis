@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blitz.API</name>
+    </assembly>
+    <members>
+        <member name="M:Blitz.API.Controllers.EmailController.SendConcurrentEmail(Blitz.Application.Dtos.EmailPayload)">
+            <summary>
+            Used for sending concurrent emails to multiple recipients with an attachment
+            </summary>
+            <param name="emailPayload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.ImageController.DownloadAllPictures(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Download pictures for a specific category. E.g. nature
+            </summary>
+            <param name="imageView"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.ImageController.GetNatureImages(Blitz.Application.Dtos.FilteredPayload)">
+            <summary>
+            Read all images from an external API, from Pexels. E.g. nature
+            </summary>
+            <param name="filteredPayload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.ReportController.LoadDocuments(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Threading.CancellationToken)">
+            <summary>
+            This endpoint is used to process the content of a big csv file or multiple ones.
+            This method will read the csv lines, convert into a model and insert them into table in a parallel manner
+            </summary>
+            <param name="createDocumentResponse"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.UserController.Login(Blitz.Application.Dtos.UserLoginModel)">
+            <summary>
+            Provides access to resources authorizing a user with the right roles and permissions
+            </summary>
+            <param name="userLoginModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.UserController.Signup(Blitz.Application.Dtos.UserRegisterModel)">
+            <summary>
+            Used for adding a new user in the system
+            </summary>
+            <param name="userRegisterModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.VideoController.DownloadAllVideos(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Download videos for a specific category. E.g. nature
+            </summary>
+            <param name="imageView"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.VideoController.GetFilteredPagedVideos(Blitz.Application.Dtos.FilteredPayload)">
+            <summary>
+            Read all videos from an external API, from Pexels. E.g. nature
+            </summary>
+            <param name="filteredPayload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blitz.API.Controllers.VideoController.UploadVideos(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            Upload a new video into the database 
+            </summary>
+            <param name="createDocumentResponse"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

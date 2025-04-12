@@ -1,0 +1,17 @@
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\bin\Debug\net6.0\Blitz.Infrastructure.deps.json
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\bin\Debug\net6.0\Blitz.Infrastructure.runtimeconfig.json
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\bin\Debug\net6.0\Blitz.Infrastructure.dll
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\bin\Debug\net6.0\Blitz.Infrastructure.pdb
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\bin\Debug\net6.0\Blitz.Domain.dll
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\bin\Debug\net6.0\Blitz.Domain.pdb
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.AssemblyInfo.cs
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.csproj.CopyComplete
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.dll
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\refint\Blitz.Infrastructure.dll
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.pdb
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\Blitz.Infrastructure.genruntimeconfig.cache
+C:\Users\alex_\source\repos\AsynchronoysProgrammingThesis\Blitz.Infrastructure\obj\Debug\net6.0\ref\Blitz.Infrastructure.dll
